@@ -4,12 +4,14 @@ function imDim = getImDim(imName)
 % with the name "imName" lol so easy right
 OA = '/Users/Imperssonator/Documents/MATLAB/Ocular_Ascension/';
 imDir = dir(OA);
+disp(imName)
 
 for i = 1:length(imDir)
     if ~imDir(i).isdir
         fid = fopen([OA, imDir(i).name]);
         mdCell = textscan(fid,'%s');
         mdCell = mdCell{1};
+        fclose(fid);
         for j = 1:length(mdCell)
             if strcmp(imName,mdCell{j})
                 for k = j:length(mdCell)

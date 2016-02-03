@@ -1,11 +1,11 @@
-function exp = runAFM(exp,parentDir)
+function expt = runAFM(expt,parentDir)
 
 %Run AFM
 % For each device, and each image of that device, create a .tif, and
 % put the relevant params into exp.AFM 
 
-AFMFolder = [parentDir, exp.name, '/AFM/Phase/'];
-exp.AFMFolder = AFMFolder;
+AFMFolder = [parentDir, expt.name, '/AFM/Phase/'];
+expt.AFMFolder = AFMFolder;
 imDir = compileImgs(AFMFolder);
 % imDir is structure with fields:
 %  name (file string)
@@ -15,30 +15,30 @@ imDir = compileImgs(AFMFolder);
 %  other stuff
 
 % Put AFM raw image file details into exp struct
-for i = 1:length(exp.DEV)
-    devName = exp.DEV(i).devName;
+for i = 1:length(expt.DEV)
+    devName = expt.DEV(i).devName;
     numDevImgs = 0;
     for j = 1:length(imDir)
         if strcmp(devName,imDir(j).devName)
             numDevImgs = numDevImgs+1;
-            exp.DEV(i).AFM(numDevImgs).imPath = imDir(j).path;
-            exp.DEV(i).AFM(numDevImgs).imName = imDir(j).imName;
-            exp.DEV(i).AFM(numDevImgs).imFile = imDir(j).name;
-            exp.DEV(i).AFM(numDevImgs).IMG = imread(imDir(j).path);
-            exp.DEV(i).AFM(numDevImgs).imDim = getImDim(imDir(j).imName);
-            exp.DEV(i).AFM(numDevImgs).tifPath = makeTif(imDir(j).path); % Make .tif image just cuz
+            expt.DEV(i).AFM(numDevImgs).imPath = imDir(j).path;
+            expt.DEV(i).AFM(numDevImgs).imName = imDir(j).imName;
+            expt.DEV(i).AFM(numDevImgs).imFile = imDir(j).name;
+            expt.DEV(i).AFM(numDevImgs).IMG = imread(imDir(j).path);
+            expt.DEV(i).AFM(numDevImgs).imDim = getImDim(imDir(j).imName);
+            expt.DEV(i).AFM(numDevImgs).tifPath = makeTif(imDir(j).path); % Make .tif image just cuz
             
             % Now check for existing FiberApp data and compile that stuff
             fibPath = [imDir(j).path(1:findLastDot(imDir(j).path)), 'fib.mat'];
-            if exist(fibPath)
-                exp.DEV(i).AFM(numDevImgs).fibPath = fibPath;
+            if exist(fibPath,'file')
+                expt.DEV(i).AFM(numDevImgs).fibPath = fibPath;
             end
         end
     end
-    exp.DEV(i).numImgs = numDevImgs;
-    exp = getS2D(exp,i);
-    exp = getFibLen(exp,i);
-    exp = getCurvDist(exp,i);
+    expt.DEV(i).numImgs = numDevImgs;
+    expt = getS2D(expt,i);
+    expt = getFibLen(expt,i);
+    expt = getCurvDist(expt,i);
 end
 
 end

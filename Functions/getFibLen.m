@@ -1,4 +1,4 @@
-function exp = getFibLen(exp,devNum)
+function expt = getFibLen(expt,devNum)
 % Given "path", the path to the folder of fiber data files with a /, and
 % "devStr", a string of the title of the device (0-3 or whatever), and
 % "angleStep", the level of discretization of the angular distribution,
@@ -9,10 +9,10 @@ function exp = getFibLen(exp,devNum)
 
 numBins = 50; % default for now
 
-FS = CompileFib(exp.AFMFolder,exp.DEV(devNum).devName);
+FS = CompileFib(expt.AFMFolder,expt.DEV(devNum).devName);
 if isempty(fieldnames(FS))
-    exp.DEV(devNum).avgFibLen = [];
-    exp.DEV(devNum).stdFibLen = [];
+    expt.DEV(devNum).avgFibLen = [];
+    expt.DEV(devNum).stdFibLen = [];
     return
 end
 fibLen = [];
@@ -22,8 +22,8 @@ for i = 1:length(FS)
     fibLen = [fibLen, fibLeni];
 end
 
-exp.DEV(devNum).avgFibLen = mean(fibLen);
-exp.DEV(devNum).stdFibLen = std(fibLen);
+expt.DEV(devNum).avgFibLen = mean(fibLen);
+expt.DEV(devNum).stdFibLen = std(fibLen);
 
 end
 

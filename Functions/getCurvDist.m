@@ -1,4 +1,4 @@
-function exp = getCurvDist(exp,devNum)
+function expt = getCurvDist(expt,devNum)
 % Given "path", the path to the folder of fiber data files with a /, and
 % "devStr", a string of the title of the device (0-3 or whatever), and
 % "angleStep", the level of discretization of the angular distribution,
@@ -9,10 +9,10 @@ function exp = getCurvDist(exp,devNum)
 
 numBins = 50; % default for now
 
-FS = CompileFib(exp.AFMFolder,exp.DEV(devNum).devName);
+FS = CompileFib(expt.AFMFolder,expt.DEV(devNum).devName);
 if isempty(fieldnames(FS))
-    exp.DEV(devNum).avgCurv = [];
-    exp.DEV(devNum).stdCurv = [];
+    expt.DEV(devNum).avgCurv = [];
+    expt.DEV(devNum).stdCurv = [];
     return
 end
 curv = [];
@@ -22,8 +22,8 @@ for i = 1:length(FS)
     curv = [curv, curvi];
 end
 
-exp.DEV(devNum).avgCurv = mean(abs(curv));
-exp.DEV(devNum).stdCurv = std(curv);
+expt.DEV(devNum).avgCurv = mean(abs(curv));
+expt.DEV(devNum).stdCurv = std(curv);
 
 end
 

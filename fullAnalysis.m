@@ -11,22 +11,22 @@ addpath('Functions')
 addpath('Data')
 
 SP = [expName, '.mat'];
-exp = struct();
-exp.name = expName;
-exp.parentDirectory = parentDir;
+expt = struct();
+expt.name = expName;
+expt.parentDirectory = parentDir;
 
 % Process variables
-exp.DEV = addProcVars(exp,parentDir);
+expt.DEV = addProcVars(expt,parentDir);
 
 % AFM
-exp = runAFM(exp,parentDir);
+expt = runAFM(expt,parentDir);
 
 % UV-Vis
 
 
 % Electrical
 
-save(SP,'exp')
+save(SP,'expt')
 end
 
 function DEV = addProcVars(exp,parentDir)

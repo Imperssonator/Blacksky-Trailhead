@@ -1,4 +1,4 @@
-function exp = getS2D(exp,devNum)
+function expt = getS2D(expt,devNum)
 % Given "path", the path to the folder of fiber data files with a /, and
 % "devStr", a string of the title of the device (0-3 or whatever), and
 % "angleStep", the level of discretization of the angular distribution,
@@ -9,10 +9,10 @@ function exp = getS2D(exp,devNum)
 
 defaultAngleStep = 5;
 
-FS = CompileFib(exp.AFMFolder,exp.DEV(devNum).devName);
+FS = CompileFib(expt.AFMFolder,expt.DEV(devNum).devName);
 if isempty(fieldnames(FS))
-    exp.DEV(devNum).S2D = [];
-    exp.DEV(devNum).S2DSE = [];
+    expt.DEV(devNum).S2D = [];
+    expt.DEV(devNum).S2DSE = [];
     return
 end
 S = [];
@@ -22,7 +22,7 @@ for i = 1:length(FS)
 end
 
 S_Avg = mean(S,1);
-exp.DEV(devNum).S2D = S_Avg;
+expt.DEV(devNum).S2D = S_Avg;
 S_Std = std(S);
 nsamps = length(S);
 CI = tpdf(0.025,nsamps)*S_Std/sqrt(nsamps);
@@ -32,7 +32,7 @@ CI = tpdf(0.025,nsamps)*S_Std/sqrt(nsamps);
 % disp(CI)
 % disp('Standard Error:')
 SE = S_Std/sqrt(nsamps);
-exp.DEV(devNum).S2DSE = SE;
+expt.DEV(devNum).S2DSE = SE;
 % disp(SE)
 
 end
