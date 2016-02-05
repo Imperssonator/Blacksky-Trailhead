@@ -16,7 +16,7 @@ expt.name = expName;
 expt.parentDirectory = parentDir;
 
 % Process variables
-expt.DEV = addProcVars(expt,parentDir);
+expt.dev = addProcVars(expt,parentDir);
 
 % AFM
 expt = runAFM(expt,parentDir);
@@ -25,11 +25,12 @@ expt = runAFM(expt,parentDir);
 
 
 % Electrical
+expt.dev = runElectrical(expt,parentDir);
 
 save(SP,'expt')
 end
 
-function DEV = addProcVars(exp,parentDir)
+function dev = addProcVars(exp,parentDir)
 
 xlsFile = [parentDir, exp.name, '/Process.xlsx'];
 [~, ~, procTable] = xlsread(xlsFile);
@@ -37,21 +38,21 @@ procTable = CleanXLSCell(procTable);
 %     disp(alldata)
 [numProcVars,numDevs] = size(procTable); % Number of process variables, number of devices (columns in spreadsheet)
 
-DEV = struct();
+dev = struct();
 for dd = 1:numDevs-1  % iterate over devices in exp struct (exclude first column...)
     
     ddCol = dd+1;
     % Find which column has device dd
-    DEV(dd).devName = getDevName(procTable,ddCol);
+    dev(dd).devName = getDevName(procTable,ddCol);
     
     for i = 1:numProcVars
         procVari = procTable{i,1}; % category = name of process variable in row i
         cellidd = procTable{i,ddCol}; % store value of that process variable in cellidd
-        DEV(dd).process.(procVari)=cellidd; %store the value of cellji in the exp structure process section
+        dev(dd).process.(procVari)=cellidd; %store the value of cellji in the exp structure process section
     end
 
-    DEV(dd).process = ClearEmpty(DEV(dd).process);
-    DEV(dd).process = AddSolventProps(DEV(dd).process);
+    dev(dd).process = ClearEmpty(dev(dd).process);
+    dev(dd).process = AddSolventProps(dev(dd).process);
 end
 
 end

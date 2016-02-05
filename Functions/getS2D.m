@@ -9,10 +9,10 @@ function expt = getS2D(expt,devNum)
 
 defaultAngleStep = 5;
 
-FS = CompileFib(expt.AFMFolder,expt.DEV(devNum).devName);
+FS = CompileFib(expt.AFMFolder,expt.dev(devNum).devName);
 if isempty(fieldnames(FS))
-    expt.DEV(devNum).S2D = [];
-    expt.DEV(devNum).S2DSE = [];
+    expt.dev(devNum).S2D = [];
+    expt.dev(devNum).S2DSE = [];
     return
 end
 S = [];
@@ -22,7 +22,7 @@ for i = 1:length(FS)
 end
 
 S_Avg = mean(S,1);
-expt.DEV(devNum).S2D = S_Avg;
+expt.dev(devNum).S2D = S_Avg;
 S_Std = std(S);
 nsamps = length(S);
 CI = tpdf(0.025,nsamps)*S_Std/sqrt(nsamps);
@@ -32,7 +32,7 @@ CI = tpdf(0.025,nsamps)*S_Std/sqrt(nsamps);
 % disp(CI)
 % disp('Standard Error:')
 SE = S_Std/sqrt(nsamps);
-expt.DEV(devNum).S2DSE = SE;
+expt.dev(devNum).S2DSE = SE;
 % disp(SE)
 
 end

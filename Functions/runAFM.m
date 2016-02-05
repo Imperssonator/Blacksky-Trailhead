@@ -15,27 +15,27 @@ imDir = compileImgs(AFMFolder);
 %  other stuff
 
 % Put AFM raw image file details into exp struct
-for i = 1:length(expt.DEV)
-    devName = expt.DEV(i).devName;
+for i = 1:length(expt.dev)
+    devName = expt.dev(i).devName;
     numDevImgs = 0;
     for j = 1:length(imDir)
         if strcmp(devName,imDir(j).devName)
             numDevImgs = numDevImgs+1;
-            expt.DEV(i).AFM(numDevImgs).imPath = imDir(j).path;
-            expt.DEV(i).AFM(numDevImgs).imName = imDir(j).imName;
-            expt.DEV(i).AFM(numDevImgs).imFile = imDir(j).name;
-            expt.DEV(i).AFM(numDevImgs).IMG = imread(imDir(j).path);
-            expt.DEV(i).AFM(numDevImgs).imDim = getImDim(imDir(j).imName);
-            expt.DEV(i).AFM(numDevImgs).tifPath = makeTif(imDir(j).path); % Make .tif image just cuz
+            expt.dev(i).AFM(numDevImgs).imPath = imDir(j).path;
+            expt.dev(i).AFM(numDevImgs).imName = imDir(j).imName;
+            expt.dev(i).AFM(numDevImgs).imFile = imDir(j).name;
+            expt.dev(i).AFM(numDevImgs).IMG = imread(imDir(j).path);
+            expt.dev(i).AFM(numDevImgs).imDim = getImDim(imDir(j).imName);
+            expt.dev(i).AFM(numDevImgs).tifPath = makeTif(imDir(j).path); % Make .tif image just cuz
             
             % Now check for existing FiberApp data and compile that stuff
             fibPath = [imDir(j).path(1:findLastDot(imDir(j).path)), 'fib.mat'];
             if exist(fibPath,'file')
-                expt.DEV(i).AFM(numDevImgs).fibPath = fibPath;
+                expt.dev(i).AFM(numDevImgs).fibPath = fibPath;
             end
         end
     end
-    expt.DEV(i).numImgs = numDevImgs;
+    expt.dev(i).numImgs = numDevImgs;
     expt = getS2D(expt,i);
     expt = getFibLen(expt,i);
     expt = getCurvDist(expt,i);

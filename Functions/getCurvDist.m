@@ -9,10 +9,10 @@ function expt = getCurvDist(expt,devNum)
 
 numBins = 50; % default for now
 
-FS = CompileFib(expt.AFMFolder,expt.DEV(devNum).devName);
+FS = CompileFib(expt.AFMFolder,expt.dev(devNum).devName);
 if isempty(fieldnames(FS))
-    expt.DEV(devNum).avgCurv = [];
-    expt.DEV(devNum).stdCurv = [];
+    expt.dev(devNum).avgCurv = [];
+    expt.dev(devNum).stdCurv = [];
     return
 end
 curv = [];
@@ -22,8 +22,8 @@ for i = 1:length(FS)
     curv = [curv, curvi];
 end
 
-expt.DEV(devNum).avgCurv = mean(abs(curv));
-expt.DEV(devNum).stdCurv = std(curv);
+expt.dev(devNum).avgCurv = mean(abs(curv));
+expt.dev(devNum).stdCurv = std(curv);
 
 end
 

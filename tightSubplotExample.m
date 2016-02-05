@@ -1,16 +1,16 @@
 %% Generate Data
 % Generate your unprecedented, high-impact data...
 
-X = (0:0.1:10)
-Y1 = X.^2
-Y2 = sin(X)
-Y3 = exp(-X)
+X = (0:0.1:10);
+Y1 = X.^2+randn(size(X));
+Y2 = sin(X)+randn(size(X))/10;
+Y3 = exp(-X)+randn(size(X))/10;
 
 %% Initialize Plot Area
 % tight_subplot( <number of columns>, <number of rows>, <gap between axes>,
 % <upper and lower margin outside plot>, <right and left margin> )
 figure
-ha = tight_subplot(3, 1, 0, 0.1, 0.12)
+ha = tight_subplot(3, 1, 0, 0.1, 0.12);
 % returns ha, a matrix of axis handles, and creates a figure.
 
 %% Plot Data
@@ -18,9 +18,9 @@ ha = tight_subplot(3, 1, 0, 0.1, 0.12)
 % of doubles, but this seems to work with plot(). This is some weird matlab
 % thing with axes handles
 
-plot(ha(1),X,Y1,'-k')
+plot(ha(1),X,Y1,'ok')
 plot(ha(2),X,Y2,'-b')
-plot(ha(3),X,Y3,'-r')
+plot(ha(3),X,Y3,'or')
 
 %% Edit Figure
 % Edit this figure using plot tools, or if you like doing it

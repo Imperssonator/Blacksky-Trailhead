@@ -9,10 +9,10 @@ function expt = getFibLen(expt,devNum)
 
 numBins = 50; % default for now
 
-FS = CompileFib(expt.AFMFolder,expt.DEV(devNum).devName);
+FS = CompileFib(expt.AFMFolder,expt.dev(devNum).devName);
 if isempty(fieldnames(FS))
-    expt.DEV(devNum).avgFibLen = [];
-    expt.DEV(devNum).stdFibLen = [];
+    expt.dev(devNum).avgFibLen = [];
+    expt.dev(devNum).stdFibLen = [];
     return
 end
 fibLen = [];
@@ -22,8 +22,8 @@ for i = 1:length(FS)
     fibLen = [fibLen, fibLeni];
 end
 
-expt.DEV(devNum).avgFibLen = mean(fibLen);
-expt.DEV(devNum).stdFibLen = std(fibLen);
+expt.dev(devNum).avgFibLen = mean(fibLen);
+expt.dev(devNum).stdFibLen = std(fibLen);
 
 end
 
