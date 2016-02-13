@@ -22,8 +22,8 @@ for i = 1:length(FS)
     fibLen = [fibLen, fibLeni];
 end
 
-expt.dev(devNum).avgFibLen = median(fibLen);
-expt.dev(devNum).stdFibLen = std(fibLen)/sqrt(length(fibLen));
+expt.dev(devNum).avgFibLen = mean(fibLen);
+expt.dev(devNum).stdFibLen = std(fibLen)/sqrt(length(FS));
 
 end
 

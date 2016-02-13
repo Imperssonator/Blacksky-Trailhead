@@ -12,6 +12,7 @@ Y1e = [];
 
 for i = 1:length(expt.dev)
     
+    xVar = 'AgeTime';
     yVar = 'avgFibLen';
     if ~isempty(expt.dev(i).S2D) && ~strcmp(expt.dev(i).devName,'4-T1-2')
 %         disp(expt.dev(i).devName)

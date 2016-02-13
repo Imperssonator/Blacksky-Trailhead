@@ -13,7 +13,7 @@ end
 % Model Fit
 
 c = 1;
-for p = 1:4
+for p = 1:3
     reg(c,p) = MultiPolyRegress(X,Y,p);
     loocv(c,p) = reg(c,p).CVMAE;
 end

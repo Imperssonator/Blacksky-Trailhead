@@ -22,13 +22,14 @@ regY = regX.*B(2)+B(1);
 
 % Plot data
 hfig = figure;
-hold on
-hfit = plot(regX,regY,'-k');
-herr = herrorbar(S,M,SE,SE);
-hdata = scatter(S,M); drawnow;
+hax = gca;
+hold(hax,'on')
+hfit = plot(hax,regX,regY,'-k');
+[xb, yb, esym] = herrorbar(S,M,SE);
+herr = plot(hax,xb,yb,esym);
+hdata = scatter(hax,S,M); drawnow;
 
 % Adjust axis settings
-hax = gca;
 hax.YLabel.String = 'Mobility (cm^2/Vs)';
 hax.XLabel.String = 'S_{2D}';
 hax.FontSize=20;
