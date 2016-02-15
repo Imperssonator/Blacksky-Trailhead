@@ -8,6 +8,7 @@ function expt = getFibLen(expt,devNum)
 % inidividual image so variance can be analyzed.
 
 numBins = 50; % default for now
+margin = 30;
 
 FS = CompileFib(expt.AFMFolder,expt.dev(devNum).devName);
 if isempty(fieldnames(FS))
@@ -18,7 +19,7 @@ end
 fibLen = [];
 
 for i = 1:length(FS)
-    fibLeni = GetFibLen(FS(i).FilePath);
+    fibLeni = GetFibLen(FS(i).FilePath,margin);
     fibLen = [fibLen, fibLeni];
 end
 
@@ -50,7 +51,7 @@ end
 
 end
 
-function FL = GetFibLen(FilePath)
+function FL = GetFibLen(FilePath,margin)
 
 load(FilePath)
 
@@ -62,8 +63,8 @@ sizeY = imageData.sizeY;
 
 for i = 1:length(FibCell)
     XYi = FibCell{i};
-    if any(XYi(1,:)<10) || any(XYi(1,:)>(sizeX-10)) ||...    % if any part of this fiber goes off the edge
-            any(XYi(2,:)<10) || any(XYi(2,:)>(sizeY-10))
+    if any(XYi(1,:)<margin) || any(XYi(1,:)>(sizeX-margin)) ||...    % if any part of this fiber goes off the edge
+            any(XYi(2,:)<margin) || any(XYi(2,:)>(sizeY-margin))
         continue
     else
         FL = [FL, Lnm(i)];

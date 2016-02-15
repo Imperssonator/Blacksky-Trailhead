@@ -1,6 +1,6 @@
-function [MSA, MSB] = FiberApp2MS(imPath)
+function msPath = FiberApp2MS(fibPath)
 
-load(imPath)
+load(fibPath)
 XY = imageData.xy;
 NumFibs = length(XY);
 MSA = zeros(imageData.sizeY,imageData.sizeX);   % MS with angles
@@ -17,7 +17,10 @@ for f = 1:NumFibs
         vect(:, vect(2,:)>0) = - vect(:, vect(2,:)>0); % Turn the coordinate system from informatics into geometrical 
         SegAngle = acos(vect(1,:))*180/pi;
         LineVec = reshape(SegEnds,1,4); % necessary format for insertShape
-        MSBadd = ~~rgb2gray(insertShape(BW, 'line', LineVec,'Color',[255 255 255]));    % Make a 512x512 black/white with just that segment as 1's
+        MSBadd = ~~rgb2gray(insertShape(BW,...
+            'line', LineVec,...
+            'Color',[255 255 255],...
+            'SmoothEdges', true));    % Make a 512x512 black/white with just that segment as 1's
         MSBadd = ~MSB.*MSBadd;  % Only add pixels that are not currently in the structure
         MSAadd = SegAngle.*double(MSBadd);
         MSA = MSA+MSAadd;
@@ -25,8 +28,9 @@ for f = 1:NumFibs
     end
 end
 
-AngleColorMapInt(MSA,MSB);
-save([imPath(1:end-7), 'ms.mat'],'MSA','MSB')
+% AngleColorMapInt(MSA,MSB);
+msPath = [fibPath(1:end-7), 'ms.mat'];
+save([fibPath(1:end-7), 'ms.mat'],'MSA','MSB')
 
 end
 

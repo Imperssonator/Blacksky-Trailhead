@@ -135,7 +135,7 @@ end
 %% Label y axes
 
 ha(2).YLabel.String = 'S_{2D}';
-ha(1).YLabel.String = 'Median Fiber Length (nm)';
+ha(1).YLabel.String = 'Average Fiber Length (nm)';
 % Axes(3).YLabel.String = 'Mobility (cm^2/Vs)';
 ha(1).XLabel.String = 'Aging Time (days)';
 
