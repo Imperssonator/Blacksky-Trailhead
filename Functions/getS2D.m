@@ -22,7 +22,7 @@ for i = 1:length(FS)
 end
 
 S_Avg = mean(S,1);
-expt.dev(devNum).S2D = S_Avg;
+expt.dev(devNum).avgS2D = S_Avg;
 S_Std = std(S);
 nsamps = length(S);
 CI = tpdf(0.025,nsamps)*S_Std/sqrt(nsamps);
@@ -33,6 +33,8 @@ CI = tpdf(0.025,nsamps)*S_Std/sqrt(nsamps);
 % disp('Standard Error:')
 SE = S_Std/sqrt(nsamps);
 expt.dev(devNum).S2DSE = SE;
+expt.dev(devNum).S2DCI = CI;
+expt.dev(devNum).stdS2D = S_Std;
 % disp(SE)
 
 end

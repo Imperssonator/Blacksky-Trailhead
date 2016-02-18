@@ -1,9 +1,9 @@
-function [n, centers, S, MedOrient] = ODistFA(IDPath,angleStep,varargin)
+function [n, centers, S, MedOrient] = ODistFA(IDPath,angleStep,Label,varargin)
 
-if isempty(varargin)
-    noFig = 0;
-else
+if length(varargin)>0
     noFig = varargin{1};
+else
+    noFig = 0;
 end
 
 load(IDPath)
@@ -55,17 +55,51 @@ if noFig
 end
 
 % Plot distribution in a new figure
-figure('NumberTitle', 'off', 'Name', ['ODist ' datestr(now, 'HH:MM:SS dd/mm/yy')]);
+ofig = figure('NumberTitle', 'off', 'Name', ['ODist ' datestr(now, 'HH:MM:SS dd/mm/yy')]);
 title(imageData.name, 'Interpreter', 'none');
+ax1 = gca;
 
-spider = polar(centers, n);
-ax = gca;
-ax.FontSize = 16;
-text('Units', 'normalized', 'Position', [-0.15 0.16], ...
+% Create Polar Plot
+% First create outer limit
+P = polar(ax1,centers, 600 * ones(size(centers)));
+set(P, 'Visible', 'off')
+hold on
+% Then plot
+polar(ax1,centers, n, '-b');
+polar(ax1,[MedOrient*pi/180, 0, MedOrient*pi/180+pi],[300, 0, 300],'-k')
+
+% Fix the axis labels
+htext = findall(ofig,'Type','text');
+for t = 13:length(htext)
+    htext(t).String = '';
+end
+for t = 1:12
+    htext(t).FontSize = 20;
+end
+
+% Add figure label and S2D label
+text('Units', 'normalized', 'Position', [-0.19 0.10], ...
     'BackgroundColor', [1 1 1], ...
-    'String', ['S_{2D} = ' num2str(S, 2)],...
-    'FontSize', 16);
+    'String', ['S_{2D} = ', char(10), ' ', num2str(S, 2)],...
+    'FontSize', 40);
+text('Units', 'normalized', 'Position', [-0.2 0.94], ...
+    'BackgroundColor', [1 1 1], ...
+    'String', Label,...
+    'FontSize', 70);
 centers = 180*centers/pi; % recalculate into deg in case of saving to a text file
+
+% Fix line widths
+hlines = findall(ofig,'Type','line');
+for i = 1:length(hlines)
+set(hlines(i),'LineWidth',3);
+end
+
+% Fix line colors
+set(hlines(4:9),'Color',[0.8, 0.8, 0.8]);
+set(hlines(10),'Color',[0.4, 0.4, 0.4]);
+
+% Reposition and scale figure
+ofig.Position = [123 147 581 559];
 
 end
 

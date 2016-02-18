@@ -24,7 +24,8 @@ for i = 1:length(FS)
 end
 
 expt.dev(devNum).avgFibLen = mean(fibLen);
-expt.dev(devNum).stdFibLen = std(fibLen)/sqrt(length(FS));
+expt.dev(devNum).stdFibLen = std(fibLen);
+expt.dev(devNum).FibLenSE = std(fibLen)/sqrt(length(FS));
 
 end
 

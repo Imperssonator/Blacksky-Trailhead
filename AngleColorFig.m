@@ -72,24 +72,24 @@ for f = 1:NumFibs
     end
 end
 
-figure
-spy(MSB)
-figure
-spy(fbw)
+% figure
+% spy(MSB)
+% figure
+% spy(fbw)
 
 MSC(MSC==0)=1;
 
 initFill = fbw.*MSB;    % which anti-aliased pixels already have angle values
-whos initFill
+% whos initFill
 initMiss = fbw~=MSB;    % which anti-aliased pixels are missing angle values
 initMiss(fbw==0)=0;
-whos initMiss
+% whos initMiss
 [Im, Jm] = find(initMiss);
 [Ib, Jb] = find(MSB);
 numMiss = length(Im)
 numB = length(Ib)
-figure
-spy(initMiss)
+% figure
+% spy(initMiss)
 
 ACM=MSA;                % initialize angles with MSA
 

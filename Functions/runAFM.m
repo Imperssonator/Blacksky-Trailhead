@@ -39,6 +39,7 @@ for i = 1:length(expt.dev)
     expt = getS2D(expt,i);
     expt = getFibLen(expt,i);
     expt = getCurvDist(expt,i);
+    expt = get2DOP(expt,i);
 end
 
 end

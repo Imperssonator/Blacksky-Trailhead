@@ -14,15 +14,15 @@ for i = 1:length(expt.dev)
     
     xVar = 'AgeTime';
     yVar = 'avgFibLen';
-    if ~isempty(expt.dev(i).S2D) && ~strcmp(expt.dev(i).devName,'4-T1-2')
+    if ~isempty(expt.dev(i).avgS2D) && ~strcmp(expt.dev(i).devName,'4-T1-2')
 %         disp(expt.dev(i).devName)
         X1 = [X1, expt.dev(i).process.(xVar)];
         Y1 = [Y1, expt.dev(i).(yVar)];
-        Y1e = [Y1e, expt.dev(i).stdFibLen];
+        Y1e = [Y1e, expt.dev(i).FibLenSE];
     end
     
     yVar = 'S2D';
-    if ~isempty(expt.dev(i).S2D) && ~strcmp(expt.dev(i).devName,'4-T1-2')
+    if ~isempty(expt.dev(i).avgS2D) && ~strcmp(expt.dev(i).devName,'4-T1-2')
 %         disp(expt.dev(i).devName)
         X2 = [X2, expt.dev(i).process.(xVar)];
         Y2 = [Y2, expt.dev(i).(yVar)];
