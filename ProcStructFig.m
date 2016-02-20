@@ -21,7 +21,7 @@ for i = 1:length(expt.dev)
         Y1e = [Y1e, expt.dev(i).FibLenSE];
     end
     
-    yVar = 'S2D';
+    yVar = 'avgS2D';
     if ~isempty(expt.dev(i).avgS2D) && ~strcmp(expt.dev(i).devName,'4-T1-2')
 %         disp(expt.dev(i).devName)
         X2 = [X2, expt.dev(i).process.(xVar)];
@@ -150,6 +150,17 @@ end
 for i = 1:length(ha)
     ha(i).YLabel.Position(1) = bestPos;       % enforce all y labels to use this location
 end
+
+htexA = text('Units', 'normalized', 'Position', [0.03 1.92], ...
+    'BackgroundColor', [1 1 1], ...
+    'String', 'A',...
+    'FontSize', 28,...
+    'EdgeColor', [1 1 1]);
+htexB = text('Units', 'normalized', 'Position', [0.03 0.92], ...
+    'BackgroundColor', [1 1 1], ...
+    'String', 'B',...
+    'FontSize', 28,...
+    'EdgeColor', [1 1 1]);
 
 %% Export
 

@@ -23,6 +23,9 @@ end
 
 S_Avg = mean(S,1);
 expt.dev(devNum).avgS2D = S_Avg;
+disp(expt.dev(devNum).devName)
+disp(S)
+disp(S_Avg)
 S_Std = std(S);
 nsamps = length(S);
 CI = tpdf(0.025,nsamps)*S_Std/sqrt(nsamps);

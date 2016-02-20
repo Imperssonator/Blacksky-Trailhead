@@ -20,8 +20,6 @@ for i = 1:length(dev)
         M = [M, dev(i).satMob];
     end
 end
-fld
-SE
 
 % Model Fit
 reg = MultiPolyRegress(fld',M',1);
@@ -41,7 +39,7 @@ hdata = scatter(hax,fld,M); drawnow;
 
 % Adjust axis settings
 hax.YLabel.String = 'Mobility (cm^2/Vs)';
-hax.XLabel.String = 'Fiber Length Density µm^{-1}';
+hax.XLabel.String = 'Fiber Length Density (µm^{-1})';
 hax.FontSize=20;
 hax.Box = 'on';
 hax.LineWidth = 0.75;
@@ -67,5 +65,5 @@ htex = text('Units', 'normalized', 'Position', [0.417 0.94], ...
     'FontSize', 20,...
     'EdgeColor', [0.6 0.6 0.6]);
 
-hgexport(hfig, ['~/Documents/GA Tech/Research/Papers/Quantification of P3HT Microstructure/MobS2D.tif'],  ...
+hgexport(hfig, ['~/Documents/GA Tech/Research/Papers/Quantification of P3HT Microstructure/MobvFLD.tif'],  ...
      hgexport('factorystyle'), 'Format', 'tiff'); 
